@@ -69,6 +69,17 @@ body {
     padding-bottom: 10px;
 }
 
+/* ▼▼▼ ここから追加 ▼▼▼ */
+/* 曜日ヘッダーの色分け */
+.weekdays div:first-child { /* 日曜日 */
+    color: #e74c3c;
+}
+.weekdays div:last-child { /* 土曜日 */
+    color: #3498db;
+}
+/* ▲▲▲ ここまで追加 ▲▲▲ */
+
+
 .days div {
     padding: 10px;
     border-radius: 50%;
@@ -92,6 +103,24 @@ body {
     font-weight: bold;
 }
 
+/* ▼▼▼ ここから追加 ▼▼▼ */
+/* 日付の色分け */
+.days .sunday {
+    color: #e74c3c;
+}
+
+.days .saturday {
+    color: #3498db;
+}
+
+/* 'today'のスタイルは色分けより優先する */
+.days .today.sunday,
+.days .today.saturday {
+    color: #fff;
+}
+/* ▲▲▲ ここまで追加 ▲▲▲ */
+
+
 /* --- アナログ時計スタイル --- */
 #clock-container {
     width: 300px;
@@ -113,7 +142,6 @@ body {
     color: #444;
 }
 
-/* 数字を配置 */
 .number1 { transform: rotate(30deg); }
 .number2 { transform: rotate(60deg); }
 .number3 { transform: rotate(90deg); }
