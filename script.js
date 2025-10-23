@@ -23,7 +23,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const firstDayOfWeek = firstDayOfMonth.getDay(); // 0 (日) - 6 (土)
         const lastDateOfMonth = lastDayOfMonth.getDate();
         const prevMonthLastDate = lastDayOfPrevMonth.getDate();
-
+        
         const today = new Date();
 
         // 前月の日付を表示
@@ -38,6 +38,16 @@ document.addEventListener('DOMContentLoaded', () => {
         for (let i = 1; i <= lastDateOfMonth; i++) {
             const dayElement = document.createElement('div');
             dayElement.textContent = i;
+            
+            // ▼▼▼ ここから追加 ▼▼▼
+            const dayOfWeek = new Date(year, month, i).getDay();
+            if (dayOfWeek === 0) { // 日曜日
+                dayElement.classList.add('sunday');
+            } else if (dayOfWeek === 6) { // 土曜日
+                dayElement.classList.add('saturday');
+            }
+            // ▲▲▲ ここまで追加 ▲▲▲
+
             if (
                 i === today.getDate() &&
                 year === today.getFullYear() &&
@@ -47,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             calendarDaysElement.appendChild(dayElement);
         }
-
+        
         // 来月の日付をグリッドの残りに表示
         const remainingDays = 42 - calendarDaysElement.children.length; // 6行 * 7列 = 42
         for (let i = 1; i <= remainingDays; i++) {
@@ -91,9 +101,7 @@ document.addEventListener('DOMContentLoaded', () => {
         minuteHand.style.transform = `translateX(-50%) rotate(${minutesDegrees}deg)`;
         hourHand.style.transform = `translateX(-50%) rotate(${hoursDegrees}deg)`;
     }
-
-    // 1秒ごとに時計を更新
+    
     setInterval(updateClock, 1000);
-    // 初期表示
     updateClock();
 });
